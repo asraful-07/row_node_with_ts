@@ -1,5 +1,4 @@
 import { IncomingMessage } from "http";
-import { resolve } from "path";
 
 async function paresBody(req: IncomingMessage): Promise<any> {
   return new Promise((resolve, reject) => {
