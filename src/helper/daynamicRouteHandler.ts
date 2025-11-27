@@ -5,20 +5,17 @@ function findDynamicRoute(method: string, url: string) {
   if (!methodMap) return null;
 
   for (const [routePath, handler] of methodMap.entries()) {
-    // "/api/users/:id" --> ["api", "users", ":id"]
     const routeParts = routePath.split("/");
-    // "/api/users/1" --> ["api", "users", "10"]
     const urlParts = url.split("/");
 
     if (routeParts.length !== urlParts.length) continue;
 
-    const params: any = {}; //{id: 2}
+    const params: any = {};
     let matched = true;
 
-    // "/api/users/:id"
     for (let i = 0; i < routeParts.length; i++) {
       if (routeParts[i]?.startsWith(":")) {
-        params[routeParts[i]?.substring(1)!] = urlParts[i]; // {id:1}
+        params[routeParts[i]?.substring(1)!] = urlParts[i];
       } else if (routeParts[i] !== urlParts[i]) {
         matched = false;
         break;
